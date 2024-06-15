@@ -1,13 +1,14 @@
 import React from 'react';
 import './App.css';
 import Sidebar from './Sidebar.js';
+import Chat from "./Chat.js"
 
 function App() {
   return (
     <div className="App">
       <div className='app_body'>
         <Sidebar />
-        {/* chat area */}
+        <Chat />
       </div>
     </div>
   );
