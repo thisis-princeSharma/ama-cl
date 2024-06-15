@@ -46,4 +46,5 @@ input {
     flex: 1;
     background-color: white;
     overflow: scroll;
+    border-bottom-left-radius: 10px ;
 }
