@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Sidebar.css";
 import { Avatar, IconButton } from "@mui/material";
 import DonutLargeIcon from "@mui/icons-material/DonutLarge";
@@ -6,12 +6,23 @@ import ChatIcon from "@mui/icons-material/Chat";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import SidebarChat from "./SidebarChat";
+import db from "./firebase";
 
 function Sidebar() {
+  const [rooms, setRooms] = useState([])
+  useEffect(() => {
+    db.collection('rooms').onSnapshot(snapshot => (
+      setRooms(snapshot.docs.maps(docs => ({
+        id: doc.id,
+        data: doc.data(),
+
+      })))
+    ))
+  }, [])
   return (
     <div className="sidebar">
       <div className="sidebar_header">
-        <Avatar src="https://api.dicebear.com/8.x/adventurer-neutral/svg?seed=sugardaddy"/>
+        <Avatar src="https://api.dicebear.com/8.x/adventurer-neutral/svg?seed=sugardaddy" />
         <div className="sidebar_headerRight">
           <IconButton>
             <DonutLargeIcon />
@@ -31,11 +42,11 @@ function Sidebar() {
         </div>
       </div>
       <div className="sidebar_chats">
-        <SidebarChat addNewChat/>
-        <SidebarChat />
-        <SidebarChat />
-        <SidebarChat />
-        <SidebarChat />
+        <SidebarChat addNewChat />
+        {rooms.maps((room) => (
+          <SidebarChat key={room.id} id={room.id}
+            name={room.data.name} />
+        ))}
       </div>
     </div>
   );
