@@ -6,19 +6,20 @@ import AttachFile from "@mui/icons-material/AttachFile";
 import MoreVert from "@mui/icons-material/MoreVert";
 import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
 import MicIcon from "@mui/icons-material/Mic";
-import SelectInput from "@mui/material/Select/SelectInput";
+
 
 function Chat() {
   const [input, setInput] = useState("");
   const [seed, setSeed] = useState("");
+  
   useEffect(() => {
     setSeed(Math.floor(Math.random() * 5000));
   }, []);
 
 
   const sendMessage = (e) => {
-    e.preventDefault(); 
-    console.log('You typed input')
+    e.preventDefault();
+    console.log('You typed > ', input);
   };
 
   return (
@@ -55,8 +56,8 @@ function Chat() {
           <InsertEmoticonIcon />
         </IconButton>
         <form>
-          <input value={input} onChange={e => setInput(e.target.value)} onClick={sendMessage} placeholder="Type a message" type="submit"/>
-          <button>Send Message</button>
+          <input value={input} onChange={e => setInput(e.target.value)} onClick={sendMessage} placeholder="Type a message" />
+          <button type="submit"></button>
           <IconButton>
             <MicIcon />
           </IconButton>
