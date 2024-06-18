@@ -12,7 +12,7 @@ function Sidebar() {
   const [rooms, setRooms] = useState([])
   useEffect(() => {
     db.collection('rooms').onSnapshot(snapshot => (
-      setRooms(snapshot.docs.maps(docs => ({
+      setRooms(snapshot.docs.maps((doc) => ({
         id: doc.id,
         data: doc.data(),
 
